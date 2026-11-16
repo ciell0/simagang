@@ -21,7 +21,9 @@ class StoreLowonganRequest extends FormRequest
             'deskripsi' => ['required', 'string', 'max:10000'],
             'divisi' => ['required', 'string', 'max:100'],
             'kuota' => ['required', 'integer', 'min:1', 'max:65535'],
-            'deadline' => ['required', 'date', 'after_or_equal:today'],
+            'deadline' => [
+                Rule::when($this->status === 'open', ['after_or_equal:today']),
+            ],
             'status' => ['required', 'in:buka,tutup'],
         ];
     }
