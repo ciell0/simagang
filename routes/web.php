@@ -25,8 +25,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('lowongan', AdminLowonganController::class)->except('show');
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
-    Route::get('/monitoring/export-pdf', [MonitoringController::class, 'exportPdf'])->name('monitoring.export-pdf');
-    Route::get('/monitoring/export-excel', [MonitoringController::class, 'exportExcel'])->name('monitoring.export-excel');
+    Route::get('/monitoring/export-txt', [MonitoringController::class, 'exportTxt'])->name('monitoring.export-txt');
+    Route::get('/monitoring/export-csv', [MonitoringController::class, 'exportCsv'])->name('monitoring.export-csv');
     Route::get('/pelamar', [AdminPelamarController::class, 'index'])->name('pelamar.index');
     Route::post('/pendaftaran/{pendaftaran}/terima', [AdminPelamarController::class, 'terima'])
         ->name('pendaftaran.terima');
