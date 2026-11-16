@@ -18,7 +18,7 @@ class MonitoringController extends Controller
         ]);
     }
 
-    public function exportPdf(): Response
+    public function exportTxt(): Response
     {
         $metrics = $this->monitor->ringkas();
 
@@ -32,24 +32,24 @@ class MonitoringController extends Controller
         ]);
 
         return response($content, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="simagang-monitoring.pdf"',
+            'Content-Type' => 'text/plain',
+            'Content-Disposition' => 'attachment; filename="simagang-monitoring.txt"',
         ]);
     }
 
-    public function exportExcel(): Response
+    public function exportCsv(): Response
     {
         $metrics = $this->monitor->ringkas();
 
         $content = "Nama;Nilai\n"
-            .'memory_usage_mb;'.$metrics['memory_usage_mb'].'\n'
-            .'memory_limit_mb;'.$metrics['memory_limit_mb'].'\n'
-            .'disk_free_mb;'.$metrics['disk_free_mb'].'\n'
-            .'uptime_seconds;'.$metrics['uptime_seconds'].'\n';
+            .'memory_usage_mb;'.$metrics['memory_usage_mb']."\n"
+            .'memory_limit_mb;'.$metrics['memory_limit_mb']."\n"
+            .'disk_free_mb;'.$metrics['disk_free_mb']."\n"
+            .'uptime_seconds;'.$metrics['uptime_seconds']."\n";
 
         return response($content, 200, [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition' => 'attachment; filename="simagang-monitoring.xlsx"',
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="simagang-monitoring.csv"',
         ]);
     }
 }
