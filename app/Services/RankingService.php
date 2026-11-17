@@ -23,10 +23,12 @@ class RankingService
                     'skor' => (float) ($pendaftaran->skor ?? $service->hitung($pendaftaran)),
                 ];
             })
-            ->sortByDesc(fn (array $row) => [
-                $row['skor'],
-                (float) ($row['pendaftaran']->ipk ?? 0.0),
-                (float) ($row['pendaftaran']->pengalaman_organisasi ?? 0.0),
+            // Urutkan berdasarkan skor, IPK, dan pengalaman organisasi secara menurun
+            // sortByDesc fungsi bawaan Laravel untuk mengurutkan koleksi secara menurun (tinggi ke rendah)
+            ->sortByDesc(fn (array $row) => [ // digunakan untuk mengambil nilai dari array $row untuk diurutkan
+                $row['skor'], // pertimbangan pertama
+                (float) ($row['pendaftaran']->ipk ?? 0.0), // pertimbangan kedua (?? 0.0 --> jika null maka gunakan 0.0)
+                (float) ($row['pendaftaran']->pengalaman_organisasi ?? 0.0), // pertimbangan ketiga
             ])
             ->values()
             ->all();

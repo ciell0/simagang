@@ -37,14 +37,22 @@ class Fase5Test extends TestCase
             ->get(route('admin.monitoring.index'))
             ->assertOk();
 
-        $this->actingAs($admin)
-            ->get(route('admin.monitoring.export-pdf'))
-            ->assertOk()
-            ->assertHeader('Content-Type', 'application/pdf');
+        $textResponse = $this->actingAs($admin)
+            ->get(route('admin.monitoring.export-txt'));
 
-        $this->actingAs($admin)
-            ->get(route('admin.monitoring.export-excel'))
+        $textResponse
             ->assertOk()
-            ->assertHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            ->assertHeader('Content-Disposition', 'attachment; filename="simagang-monitoring.txt"')
+            ->assertSeeText('SIMAGANG Monitoring');
+        $this->assertStringStartsWith('text/plain', $textResponse->baseResponse->headers->get('Content-Type'));
+
+        $csvResponse = $this->actingAs($admin)
+            ->get(route('admin.monitoring.export-csv'));
+
+        $csvResponse
+            ->assertOk()
+            ->assertHeader('Content-Disposition', 'attachment; filename="simagang-monitoring.csv"')
+            ->assertSeeText('memory_usage_mb');
+        $this->assertStringStartsWith('text/csv', $csvResponse->baseResponse->headers->get('Content-Type'));
     }
 }

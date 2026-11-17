@@ -28,11 +28,11 @@
             <div class="flex flex-wrap items-center justify-between gap-3">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-900">Ekspor laporan</h2>
-                    <p class="text-sm text-slate-600">Unduh ringkasan sistem dalam format PDF atau Excel.</p>
+                    <p class="text-sm text-slate-600">Unduh ringkasan sistem dalam format teks atau CSV.</p>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                    <a href="{{ route('admin.monitoring.export-pdf') }}" class="inline-flex rounded-md bg-emerald-800 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-900">Ekspor PDF</a>
-                    <a href="{{ route('admin.monitoring.export-excel') }}" class="inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50">Ekspor Excel</a>
+                    <a href="{{ route('admin.monitoring.export-txt') }}" class="inline-flex rounded-md bg-emerald-800 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-900">Ekspor teks</a>
+                    <a href="{{ route('admin.monitoring.export-csv') }}" class="inline-flex rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50">Ekspor CSV</a>
                 </div>
             </div>
         </div>

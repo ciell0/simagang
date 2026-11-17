@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreLowonganRequest extends FormRequest
 {
@@ -22,7 +23,9 @@ class StoreLowonganRequest extends FormRequest
             'divisi' => ['required', 'string', 'max:100'],
             'kuota' => ['required', 'integer', 'min:1', 'max:65535'],
             'deadline' => [
-                Rule::when($this->status === 'open', ['after_or_equal:today']),
+                'required',
+                'date',
+                Rule::when($this->input('status') === 'buka', ['after_or_equal:today']),
             ],
             'status' => ['required', 'in:buka,tutup'],
         ];
